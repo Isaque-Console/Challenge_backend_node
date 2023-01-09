@@ -24,23 +24,17 @@ class AuthenticateUserUC {
     }
     execute({ username, password }) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const userAlreadyExists = yield this.usersRepository.getUserByUsername(username);
-                if (!userAlreadyExists) {
-                    throw new Error("Nome de usuário ou senha incorreto!");
-                }
-                const passswordMatch = yield this.passswordMatch(password, userAlreadyExists.password);
-                console.log(passswordMatch);
-                if (!passswordMatch) {
-                    throw new Error("Nome de usuário ou senha incorreto!");
-                }
-                const generateTokenProvider = new GenerateTokenProvider_1.GenerateTokenProvider();
-                const token = yield generateTokenProvider.execute(userAlreadyExists.id);
-                return token;
+            const userAlreadyExists = yield this.usersRepository.getUserByUsername(username);
+            if (!userAlreadyExists) {
+                throw new Error("Nome de usuário ou senha incorreto!");
             }
-            catch (error) {
-                console.log(error.message);
+            const passswordMatch = yield this.passswordMatch(password, userAlreadyExists.password);
+            if (!passswordMatch) {
+                throw new Error("Nome de usuário ou senha incorreto!");
             }
+            const generateTokenProvider = new GenerateTokenProvider_1.GenerateTokenProvider();
+            const token = yield generateTokenProvider.execute(userAlreadyExists.id);
+            return token;
         });
     }
 }

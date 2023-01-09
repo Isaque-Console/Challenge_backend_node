@@ -19,25 +19,21 @@ export class AuthenticateUserUC {
     }
 
     async execute({ username, password }: IRequest): Promise<string> {
-        try {
-            const userAlreadyExists: any = await this.usersRepository.getUserByUsername(username);
+        const userAlreadyExists: any = await this.usersRepository.getUserByUsername(username);
 
-            if (!userAlreadyExists) {
-                throw new Error("Nome de usuário ou senha incorreto!");
-            }
-
-            const passswordMatch = await this.passswordMatch(password, userAlreadyExists.password);
-            
-            if (!passswordMatch) {
-                throw new Error("Nome de usuário ou senha incorreto!");
-            }
-
-            const generateTokenProvider = new GenerateTokenProvider();
-            const token: string = await generateTokenProvider.execute(userAlreadyExists.id);
-
-            return token;
-        } catch (error: any) {
-            console.log(error.message)
+        if (!userAlreadyExists) {
+            throw new Error("Nome de usuário ou senha incorreto!");
         }
+
+        const passswordMatch = await this.passswordMatch(password, userAlreadyExists.password);
+
+        if (!passswordMatch) {
+            throw new Error("Nome de usuário ou senha incorreto!");
+        }
+
+        const generateTokenProvider = new GenerateTokenProvider();
+        const token: string = await generateTokenProvider.execute(userAlreadyExists.id);
+
+        return token;
     }
 }
