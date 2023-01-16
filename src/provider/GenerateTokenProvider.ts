@@ -5,7 +5,7 @@ class GenerateTokenProvider {
         const secretKey: string = process.env.JWT_SECRET_KEY ?? "fb645857-7a93-48dd-91c0-001fa9d8f026";
         const token = sign({}, secretKey, {
             subject: userId,
-            expiresIn: "20s"
+            expiresIn: "1 day"
         });
 
         return token;
