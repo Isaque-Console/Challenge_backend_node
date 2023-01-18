@@ -30,7 +30,7 @@ model Accounts {
 model transactions {
   id                                                String   @id
   value                                             Decimal  @db.Decimal
-  createdat                                         DateTime @db.Date
+  createdAt                                         DateTime @db.Date
   debitedAccountId                                  String
   creditedAccountId                                 String
   Accounts_accountsTotransactions_creditedAccountId Accounts @relation("accountsTotransactions_creditedAccountId", fields: [creditedAccountId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_debitedtransactions_accounts")

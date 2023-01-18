@@ -27,9 +27,38 @@ class Queries {
         });
     }
     ;
+    getTransactionsByUserId(userId, prismaClient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prismaClient.findMany({
+                where: {
+                    OR: [
+                        { debitedAccountId: userId },
+                        { creditedAccountId: userId }
+                    ]
+                }
+            });
+        });
+    }
+    ;
+    getCashOutTransactions(userId, prismaClient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prismaClient.findMany({
+                where: { debitedAccountId: userId }
+            });
+        });
+    }
+    ;
+    getCashInTransactions(userId, prismaClient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prismaClient.findMany({
+                where: { creditedAccountId: userId }
+            });
+        });
+    }
+    ;
     getAllItems(prismaClient) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prismaClient.user.findMany();
+            return yield prismaClient.findMany();
         });
     }
     ;
@@ -43,7 +72,7 @@ class Queries {
     ;
     updateItemById(id, updatedDatas, prismaClient) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield prismaClient.user.update({
+            yield prismaClient.update({
                 where: {
                     id
                 },
@@ -53,7 +82,7 @@ class Queries {
     }
     updateManyItemsById(id, updatedDatas, prismaClient) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield prismaClient.user.updateMany({
+            yield prismaClient.updateMany({
                 where: {
                     id
                 },

@@ -9,27 +9,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AccountsRepository = void 0;
+exports.TransactionsRepository = void 0;
 const queries_1 = require("../database/queries");
 const postgresqlClient_1 = require("../prisma/postgresqlClient");
-class AccountsRepository {
-    createAccount(account) {
+class TransactionsRepository {
+    getTransactionById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const queries = new queries_1.Queries();
-            return yield queries.createItem(account, postgresqlClient_1.postgresqlClient.accounts);
+            return yield queries.getItemById(id, postgresqlClient_1.postgresqlClient.transactions);
         });
     }
-    getAccount(accountId) {
+    createTransaction(transaction) {
         return __awaiter(this, void 0, void 0, function* () {
             const queries = new queries_1.Queries();
-            return yield queries.getItemById(accountId, postgresqlClient_1.postgresqlClient.accounts);
+            const result = yield queries.createItem(transaction, postgresqlClient_1.postgresqlClient.transactions);
+            if (!result)
+                throw new Error("Erro ao gravar a transação no banco de dados");
+            return result;
         });
     }
-    updateAccount(id, props) {
+    getTransactionsByUserId(userId) {
         return __awaiter(this, void 0, void 0, function* () {
             const queries = new queries_1.Queries();
-            return yield queries.updateItemById(id, props, postgresqlClient_1.postgresqlClient.accounts);
+            return yield queries.getTransactionsByUserId(userId, postgresqlClient_1.postgresqlClient.transactions);
+        });
+    }
+    getCashOutTransactions(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queries = new queries_1.Queries();
+            return yield queries.getCashOutTransactions(userId, postgresqlClient_1.postgresqlClient.transactions);
+        });
+    }
+    getCashInTransactions(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queries = new queries_1.Queries();
+            return yield queries.getCashInTransactions(userId, postgresqlClient_1.postgresqlClient.transactions);
         });
     }
 }
-exports.AccountsRepository = AccountsRepository;
+exports.TransactionsRepository = TransactionsRepository;

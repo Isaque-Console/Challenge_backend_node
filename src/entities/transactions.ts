@@ -1,10 +1,14 @@
 import { Entity } from "../core/Entity";
 
-type TransactionsProps = {
+export type TransactionsProps = {
     debitedAccountId: string;
     creditedAccountId: string;
     value: number;
-    createdAt: Date;
+    createdat: Date;
+}
+
+export interface ITransactions {
+    create(props: TransactionsProps, id?: string): Promise<Transactions | undefined>;
 }
 
 export class Transactions extends Entity<TransactionsProps> {

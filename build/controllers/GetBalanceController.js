@@ -9,19 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenerateTokenProvider = void 0;
-const jsonwebtoken_1 = require("jsonwebtoken");
-class GenerateTokenProvider {
-    execute(userId) {
-        var _a;
+exports.GetBalanceController = void 0;
+const accountsRepository_1 = require("../repositories/accountsRepository");
+const GetAccountUC_1 = require("../usecases/GetAccountUC");
+class GetBalanceController {
+    handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const secretKey = (_a = process.env.JWT_SECRET_KEY) !== null && _a !== void 0 ? _a : "fb645857-7a93-48dd-91c0-001fa9d8f026";
-            const token = (0, jsonwebtoken_1.sign)({}, secretKey, {
-                subject: userId,
-                expiresIn: "1 day"
-            });
-            return token;
+            const { accountId } = request.params;
+            const repository = new accountsRepository_1.AccountsRepository();
+            const useCase = new GetAccountUC_1.GetAccountUC(repository);
+            const result = yield useCase.getAccount(accountId);
+            return response.json(result);
         });
     }
 }
-exports.GenerateTokenProvider = GenerateTokenProvider;
+exports.GetBalanceController = GetBalanceController;

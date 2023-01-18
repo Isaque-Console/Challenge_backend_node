@@ -11,8 +11,31 @@ export class Queries {
         });
     };
 
+    async getTransactionsByUserId(userId: string, prismaClient: any): Promise<any[]> {
+        return await prismaClient.findMany({
+            where: {
+                OR: [
+                    { debitedAccountId: userId },
+                    { creditedAccountId: userId }
+                ]
+            }
+        });
+    };
+
+    async getCashOutTransactions(userId: string, prismaClient: any): Promise<any[]> {
+        return await prismaClient.findMany({
+            where: { debitedAccountId: userId }
+        });
+    };
+
+    async getCashInTransactions(userId: string, prismaClient: any): Promise<any[]> {
+        return await prismaClient.findMany({
+            where: { creditedAccountId: userId }
+        });
+    };
+
     async getAllItems(prismaClient: any): Promise<any> {
-        return await prismaClient.user.findMany();
+        return await prismaClient.findMany();
     };
 
     async createItem(item: any, prismaClient: any): Promise<any> {
@@ -22,7 +45,7 @@ export class Queries {
     };
 
     async updateItemById(id: string, updatedDatas: any, prismaClient: any): Promise<any> {
-        await prismaClient.user.update({
+        await prismaClient.update({
             where: {
                 id
             },
@@ -31,7 +54,7 @@ export class Queries {
     }
 
     async updateManyItemsById(id: string, updatedDatas: any, prismaClient: any): Promise<any> {
-        await prismaClient.user.updateMany({
+        await prismaClient.updateMany({
             where: {
                 id
             },

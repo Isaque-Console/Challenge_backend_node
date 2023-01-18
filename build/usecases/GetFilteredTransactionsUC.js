@@ -9,27 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AccountsRepository = void 0;
-const queries_1 = require("../database/queries");
-const postgresqlClient_1 = require("../prisma/postgresqlClient");
-class AccountsRepository {
-    createAccount(account) {
+exports.GetFilteredTransactionsUC = void 0;
+class GetFilteredTransactionsUC {
+    constructor(transactionsRepository) {
+        this.transactionsRepository = transactionsRepository;
+    }
+    getCashOutTransactions(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const queries = new queries_1.Queries();
-            return yield queries.createItem(account, postgresqlClient_1.postgresqlClient.accounts);
+            const result = yield this.transactionsRepository.getCashOutTransactions(userId);
+            if (!result)
+                throw new Error("Não existe conta com esse ID");
+            return result;
         });
     }
-    getAccount(accountId) {
+    getCashInTransactions(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const queries = new queries_1.Queries();
-            return yield queries.getItemById(accountId, postgresqlClient_1.postgresqlClient.accounts);
-        });
-    }
-    updateAccount(id, props) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const queries = new queries_1.Queries();
-            return yield queries.updateItemById(id, props, postgresqlClient_1.postgresqlClient.accounts);
+            const result = yield this.transactionsRepository.getCashInTransactions(userId);
+            if (!result)
+                throw new Error("Não existe conta com esse ID");
+            return result;
         });
     }
 }
-exports.AccountsRepository = AccountsRepository;
+exports.GetFilteredTransactionsUC = GetFilteredTransactionsUC;

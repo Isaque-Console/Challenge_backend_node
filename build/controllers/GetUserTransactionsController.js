@@ -9,19 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenerateTokenProvider = void 0;
-const jsonwebtoken_1 = require("jsonwebtoken");
-class GenerateTokenProvider {
-    execute(userId) {
-        var _a;
+exports.GetUserTransactionsController = void 0;
+const transactionsRepository_1 = require("../repositories/transactionsRepository");
+const GetTransactionsUC_1 = require("../usecases/GetTransactionsUC");
+class GetUserTransactionsController {
+    handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const secretKey = (_a = process.env.JWT_SECRET_KEY) !== null && _a !== void 0 ? _a : "fb645857-7a93-48dd-91c0-001fa9d8f026";
-            const token = (0, jsonwebtoken_1.sign)({}, secretKey, {
-                subject: userId,
-                expiresIn: "1 day"
-            });
-            return token;
+            const { userId } = request.params;
+            const repository = new transactionsRepository_1.TransactionsRepository();
+            const useCase = new GetTransactionsUC_1.GetTransactionsUC(repository);
+            const transactions = yield useCase.getTransactionsByUserId(userId);
+            return response.json(transactions);
         });
     }
 }
-exports.GenerateTokenProvider = GenerateTokenProvider;
+exports.GetUserTransactionsController = GetUserTransactionsController;

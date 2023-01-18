@@ -9,19 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenerateTokenProvider = void 0;
-const jsonwebtoken_1 = require("jsonwebtoken");
-class GenerateTokenProvider {
-    execute(userId) {
-        var _a;
+exports.GetUserUC = void 0;
+class GetUserUC {
+    constructor(usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+    getUserByUsername(username) {
         return __awaiter(this, void 0, void 0, function* () {
-            const secretKey = (_a = process.env.JWT_SECRET_KEY) !== null && _a !== void 0 ? _a : "fb645857-7a93-48dd-91c0-001fa9d8f026";
-            const token = (0, jsonwebtoken_1.sign)({}, secretKey, {
-                subject: userId,
-                expiresIn: "1 day"
-            });
-            return token;
+            const result = yield this.usersRepository.getUserByUsername(username);
+            if (!result)
+                throw new Error("Não existe conta com esse username.");
+            return result;
         });
     }
 }
-exports.GenerateTokenProvider = GenerateTokenProvider;
+exports.GetUserUC = GetUserUC;
