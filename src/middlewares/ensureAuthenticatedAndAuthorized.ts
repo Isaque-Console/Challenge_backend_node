@@ -16,9 +16,6 @@ export function ensureAuthenticatedAndAuthorized(request: Request, response: Res
     try {
         const { userId } = request.params;
         const tokenObject: any = verify(token, "fb645857-7a93-48dd-91c0-001fa9d8f026");
-        return response.status(401).json({
-            message: tokenObject
-        });
         
         if (tokenObject.userId !== userId) throw new Error();
 
