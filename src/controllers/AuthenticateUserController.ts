@@ -8,9 +8,9 @@ export class AuthenticateUserController {
             const { username, password } = request.body;
             const repository: UsersRepository = new UsersRepository();
             const useCase = new AuthenticateUserUC(repository);
-            const JWTToken: string = await useCase.execute({ username, password });
+            const authenticatedUser: any = await useCase.execute({ username, password });
 
-            return response.status(200).json(JWTToken);
+            return response.status(200).json(authenticatedUser);
         } catch (error: any) {
             return response.status(400).json(error.message);
         }

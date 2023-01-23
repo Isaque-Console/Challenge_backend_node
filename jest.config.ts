@@ -1,15 +1,10 @@
 import { resolve } from "path";
 const root = resolve(__dirname);
-console.log("ROOTDIR JEST: " + root);
-
 
 export default {
-  rootDir: `${root}/../`,
+  rootDir: `${root}`,
   displayName: 'testes-unitarios',
   collectCoverage: true,
-  // testMatch: [
-  //   "**/tests/**/*.test.+(ts|js)"
-  // ],
   "testMatch": [
     "**/*.steps.ts",
     "**/*.test.ts"

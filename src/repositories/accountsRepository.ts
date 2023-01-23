@@ -5,7 +5,8 @@ import { postgresqlClient } from '../prisma/postgresqlClient';
 
 export interface IAccountsRepository {
     createAccount(account: Accounts): Promise<Accounts | undefined>;
-    getAccount(accountId: string): Promise<Accounts | undefined>;
+    getAccountById(accountId: string): Promise<Accounts | undefined>;
+    getAccountByUserId(userId: string): Promise<any | undefined>;
     updateAccount(id: string, props: AccountsProps): Promise<any>;
 }
 
@@ -15,9 +16,14 @@ export class AccountsRepository implements IAccountsRepository {
         return await queries.createItem(account, postgresqlClient.accounts);
     }
 
-    async getAccount(accountId: string): Promise<Accounts | undefined> {
+    async getAccountById(accountId: string): Promise<Accounts | undefined> {
         const queries: Queries = new Queries();
         return await queries.getItemById(accountId, postgresqlClient.accounts);
+    }
+
+    async getAccountByUserId(userId: string): Promise<any | undefined> {
+        const queries: Queries = new Queries();
+        return await queries.getAccountByUserId(userId,  postgresqlClient.users, postgresqlClient.accounts);
     }
 
     async updateAccount(id: string, props: AccountsProps): Promise<any> {

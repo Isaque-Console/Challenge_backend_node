@@ -18,7 +18,7 @@ export class AuthenticateUserUC {
         return match;
     }
 
-    async execute({ username, password }: IRequest): Promise<string> {
+    async execute({ username, password }: IRequest): Promise<any> {
         const userAlreadyExists: any = await this.usersRepository.getUserByUsername(username);
 
         if (!userAlreadyExists) {
@@ -34,6 +34,6 @@ export class AuthenticateUserUC {
         const generateTokenProvider = new GenerateTokenProvider();
         const token: string = await generateTokenProvider.execute(userAlreadyExists.id);
 
-        return token;
+        return { token, user: userAlreadyExists };
     }
 }

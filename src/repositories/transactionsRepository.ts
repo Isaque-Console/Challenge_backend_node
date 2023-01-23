@@ -17,9 +17,9 @@ export class TransactionsRepository implements ITransactionsRepository {
     }
 
     async createTransaction(transaction: Transactions): Promise<Transactions> {
-        const queries: Queries = new Queries();        
+        const queries: Queries = new Queries();
         const result: Transactions | undefined = await queries.createItem(transaction, postgresqlClient.transactions);
-        if(!result) throw new Error("Erro ao gravar a transação no banco de dados");
+        if (!result) throw new Error("Erro ao gravar a transação no banco de dados");
         return result;
     }
 

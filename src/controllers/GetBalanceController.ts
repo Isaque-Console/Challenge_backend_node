@@ -5,10 +5,10 @@ import { GetAccountUC } from '../usecases/GetAccountUC';
 
 export class GetBalanceController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { accountId } = request.params;
+        const { userId } = request.params;
         const repository: AccountsRepository = new AccountsRepository();
         const useCase: GetAccountUC = new GetAccountUC(repository);
-        const result: Accounts = await useCase.getAccount(accountId);
+        const result: Accounts = await useCase.getAccountByUserId(userId);
 
         return response.json(result);
     }

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">70.37% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>19/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">70.37% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>19/27</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -77,10 +77,34 @@
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
 <a name='L14'></a><a href='#L14'>14</a>
-<a name='L15'></a><a href='#L15'>15</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -92,9 +116,21 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Accounts, AccountsProps } from "../../src/entities/accounts";
-import { AccountsRepository } from "../../src/repositories/accountsRepository";
+import { IAccountsRepository } from "../../src/repositories/accountsRepository";
 &nbsp;
-export class InMemoryAccountsRepository implements AccountsRepository {
+export class InMemoryAccountsRepository implements IAccountsRepository {
+    createAccount(account: Accounts): Promise&lt;Accounts&gt; {
+        throw new Error("Method not implemented.");
+    }
+<span class="fstat-no" title="function not covered" >    getAccountById(accountId: string): Promise&lt;Accounts&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error("Method not implemented.");</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="fstat-no" title="function not covered" >    getAccountByUserId(userId: string): Promise&lt;any&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error("Method not implemented.");</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="fstat-no" title="function not covered" >    updateAccount(id: string, props: AccountsProps): Promise&lt;any&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error("Method not implemented.");</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
     accountObject: AccountsProps = { balance: 100.00 };
     private items: Accounts[] = [
         new Accounts(this.accountObject),
@@ -102,7 +138,7 @@ export class InMemoryAccountsRepository implements AccountsRepository {
         new Accounts(this.accountObject)
     ];
 &nbsp;
-<span class="fstat-no" title="function not covered" >    async getById(id: string): Promise&lt;Accounts | undefined&gt; {</span>
+    async <span class="fstat-no" title="function not covered" >getById(id: string): Promise&lt;Accounts | undefined&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return this.items.find(account =&gt; account.id === id);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 }</pre></td></tr></table></pre>
@@ -112,7 +148,7 @@ export class InMemoryAccountsRepository implements AccountsRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-11-29T17:44:15.553Z
+                at 2023-01-19T19:50:24.460Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

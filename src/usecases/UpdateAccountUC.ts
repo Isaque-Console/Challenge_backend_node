@@ -16,7 +16,7 @@ export class UpdateAccountUC {
 
     async updateAccountBalance(id: string, transferAmount: number): Promise<any> {
         const getUseCase: GetAccountUC = new GetAccountUC(this.accountsRepository);
-        const account: any = await getUseCase.getAccount(id);
+        const account: any = await getUseCase.getAccountById(id);
 
         const updatedBalance: AccountsProps = {
             balance: this.updateBalance(account.balance, transferAmount)

@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = require("express");
+const createUserController_1 = require("./controllers/createUserController");
+const AuthenticateUserController_1 = require("./controllers/AuthenticateUserController");
+const GetBalanceController_1 = require("./controllers/GetBalanceController");
+const FinancialTransactionController_1 = require("./controllers/FinancialTransactionController");
+const ensureAuthenticatedAndAuthorized_1 = require("./middlewares/ensureAuthenticatedAndAuthorized");
+const GetUserTransactionsController_1 = require("./controllers/GetUserTransactionsController");
+const GetFilteredTransactionsController_1 = require("./controllers/GetFilteredTransactionsController");
+const router = (0, express_1.Router)();
+exports.router = router;
+router.get("/account/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new GetBalanceController_1.GetBalanceController().handle);
+router.get("/transactions/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new GetUserTransactionsController_1.GetUserTransactionsController().handle);
+router.get("/transactions/filter/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new GetFilteredTransactionsController_1.GetFilteredTransactionsController().handle);
+router.post("/users", new createUserController_1.CreateUserController().handle);
+router.post("/login", new AuthenticateUserController_1.AuthenticateUserController().handle);
+router.put("/transaction/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new FinancialTransactionController_1.FinancialTransactionController().handle);
+//# sourceMappingURL=routes.js.map

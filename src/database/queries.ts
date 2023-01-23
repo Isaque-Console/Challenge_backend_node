@@ -11,6 +11,18 @@ export class Queries {
         });
     };
 
+    async getAccountByUserId(userId: string, userPrismaClient: any, accountPrismaClient: any): Promise<any> {
+        const user: any = await userPrismaClient.findFirst({
+            where: { id: userId }
+        });
+
+        if (!user) throw new Error("Não existe usuário com esse Id");
+
+        return await accountPrismaClient.findFirst({
+            where: { id: user.accountId }
+        });
+    };
+
     async getTransactionsByUserId(userId: string, prismaClient: any): Promise<any[]> {
         return await prismaClient.findMany({
             where: {
