@@ -4,4 +4,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npx prisma generate
-RUN npm start
+EXPOSE 3000
+CMD [ "npm", "start" ]
+
+# Tentando dockerizar o meu banco de dados postgres
