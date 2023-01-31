@@ -8,15 +8,12 @@ services:
     ports:
       - 3000:3000
     environment:
-      POSTGRES_HOST: postgresql://postgres:007934561cgtfru@localhost:5432/bank?schema=public
+      DATABASE_URL: postgresql://postgres:007934561cgtfru@postgres:5432/bank
       PORT: 3000
-
     depends_on:
-      - db
-    links:
-      - db
+      - postgres
 
-  db:
+  postgres:
     image: postgres
     restart: always
     environment:
@@ -25,4 +22,3 @@ services:
       POSTGRES_DB: bank
     ports:
     - "5432:5432"
-    
