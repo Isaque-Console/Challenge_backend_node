@@ -1,24 +1,35 @@
-version: '3.1'
+version: '3.8'
 
 services:
-
   api:
     container_name: api
     build: .
     ports:
-      - 3000:3000
+      - '3000:3000'
     environment:
       DATABASE_URL: postgresql://postgres:007934561cgtfru@postgres:5432/bank
-      PORT: 3000
+    networks:
+      - db_network
     depends_on:
       - postgres
+    entrypoint: dockerize -wait tcp://postgres:5432 -timeout 20s docker-entrypoint.sh
+    command: "npx prisma db push"
 
   postgres:
     image: postgres
+    container_name: postgres-db
     restart: always
     environment:
       POSTGRES_PASSWORD: 007934561cgtfru
       POSTGRES_USER: postgres
       POSTGRES_DB: bank
+    networks:
+      - db_network
     ports:
-    - "5432:5432"
+      - '5432:5432'
+
+networks:
+  db_network:
+    driver: bridge
+
+  
