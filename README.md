@@ -255,6 +255,15 @@ get=>end: Get Balance
 create->st->get
 
 ```
+```mermaid
+flowchart LR
+
+A[Hard] -->|Text| B(Round)
+B --> C{Decision}
+C -->|One| D[Result 1]
+C -->|Two| E[Result 2]
+```
+
 **OBS:** 
 - Lembre-se de, quando fazer a requisição de Get Balance, colocar o header authorization com o token recebido na resposta do endpoint de login.
 - O formato é o seguinte: Bearer {token}.
