@@ -23,6 +23,7 @@ Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma 
 - POO
 - Clean Arch
 - Clean Code
+- SOLID
 - Senha criptografada
 
 ### Design patterns
