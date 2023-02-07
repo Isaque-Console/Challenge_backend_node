@@ -246,15 +246,6 @@ Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma 
 
 ### Diagrama de fluxo (Exemplo de fluxo)
 
-```flow
-
-create=>operation: Create User
-st=>start: Login
-get=>end: Get Balance
-
-create->st->get
-
-```
 ```mermaid
 flowchart LR
 
