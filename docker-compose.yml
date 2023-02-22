@@ -13,7 +13,7 @@ services:
     depends_on:
       - postgres
     entrypoint: dockerize -wait tcp://postgres:5432 -timeout 20s docker-entrypoint.sh
-    command: "npx prisma db push"
+    command: sh -c "npx prisma db push && npm start"
 
   postgres:
     image: postgres
