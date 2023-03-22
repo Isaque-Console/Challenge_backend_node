@@ -32,7 +32,7 @@ export class AuthenticateUserUC {
         }
 
         const generateTokenProvider = new GenerateTokenProvider();
-        const token: string = await generateTokenProvider.execute(userAlreadyExists.id);
+        const token: string = await generateTokenProvider.execute(userAlreadyExists.id ?? userAlreadyExists._id);
 
         return { token, user: userAlreadyExists };
     }
