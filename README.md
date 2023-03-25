@@ -11,6 +11,7 @@ Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma 
 - Jest
 - Prisma
 - PostgreSQL
+- MongoDB
 - Express
 
 ### Conceitos utilizados:
