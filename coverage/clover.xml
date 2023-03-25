@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1674157824484" clover="3.2.0">
-  <project timestamp="1674157824484" name="All files">
-    <metrics statements="313" coveredstatements="198" conditionals="26" coveredconditionals="20" methods="38" coveredmethods="15" elements="377" coveredelements="233" complexity="0" loc="313" ncloc="313" packages="7" files="10" classes="10"/>
+<coverage generated="1679770963599" clover="3.2.0">
+  <project timestamp="1679770963599" name="All files">
+    <metrics statements="367" coveredstatements="248" conditionals="34" coveredconditionals="24" methods="42" coveredmethods="19" elements="443" coveredelements="291" complexity="0" loc="367" ncloc="367" packages="8" files="12" classes="12"/>
     <package name="src.core">
       <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
       <file name="Entity.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/core/Entity.ts">
@@ -163,6 +163,27 @@
         <line num="5" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="src.provider">
+      <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="GenerateTokenProvider.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/provider/GenerateTokenProvider.ts">
+        <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
     <package name="src.repositories">
       <metrics statements="33" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="accountsRepository.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/repositories/accountsRepository.ts">
@@ -203,7 +224,49 @@
       </file>
     </package>
     <package name="src.usecases">
-      <metrics statements="84" coveredstatements="57" conditionals="18" coveredconditionals="13" methods="9" coveredmethods="8"/>
+      <metrics statements="123" coveredstatements="92" conditionals="24" coveredconditionals="16" methods="12" coveredmethods="11"/>
+      <file name="authenticateUserUC.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/usecases/authenticateUserUC.ts">
+        <metrics statements="39" coveredstatements="35" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+      </file>
       <file name="createAccountsUC.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/usecases/createAccountsUC.ts">
         <metrics statements="16" coveredstatements="13" conditionals="3" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
