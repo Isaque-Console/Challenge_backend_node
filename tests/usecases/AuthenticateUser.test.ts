@@ -1,16 +1,18 @@
 import { UsersRepository } from "../../src/mongoRepositories/UsersRepository";
 import { AuthenticateUserUC } from "../../src/usecases/authenticateUserUC";
-jest.mock("../../src/mongoRepositories/UsersRepository", () => {
-    const instance = {
-        getUserByUsername: jest.fn().mockResolvedValueOnce({
-            "_id": "641b2a2be9c14424aebb6588",
-            "username": "Usuário4",
-            "password": "$2b$10$qevlzwxokOTUGf8n070VS.U2pwsv.SQeGIR.j06IqVPQKQws475jK",
-            "accountId": "f266b02f-2e68-4424-aed2-7023eb2dcbdc"
-        })
-    };
-    const mockRepository = jest.fn(() => instance);
-    return { UsersRepository: mockRepository };
+
+beforeAll(() => {
+    jest.spyOn(AuthenticateUserUC.prototype, 'passswordMatch').mockImplementation(() => Promise.resolve(true));
+    jest.spyOn(UsersRepository.prototype, 'getUserByUsername').mockImplementation(() => Promise.resolve({
+        "_id": "641b2a2be9c14424aebb6588",
+        "username": "Usuário4",
+        "password": "$2b$10$qevlzwxokOTUGf8n070VS.U2pwsv.SQeGIR.j06IqVPQKQws475jK",
+        "accountId": "f266b02f-2e68-4424-aed2-7023eb2dcbdc"
+    }));
+});
+
+afterAll(() => {
+    jest.restoreAllMocks();
 });
 
 const validUsername = "Usuário4";

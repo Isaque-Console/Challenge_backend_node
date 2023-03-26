@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1679770963599" clover="3.2.0">
-  <project timestamp="1679770963599" name="All files">
-    <metrics statements="367" coveredstatements="248" conditionals="34" coveredconditionals="24" methods="42" coveredmethods="19" elements="443" coveredelements="291" complexity="0" loc="367" ncloc="367" packages="8" files="12" classes="12"/>
+<coverage generated="1679850564928" clover="3.2.0">
+  <project timestamp="1679850564928" name="All files">
+    <metrics statements="417" coveredstatements="274" conditionals="33" coveredconditionals="23" methods="47" coveredmethods="18" elements="497" coveredelements="315" complexity="0" loc="417" ncloc="417" packages="10" files="15" classes="15"/>
     <package name="src.core">
       <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
       <file name="Entity.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/core/Entity.ts">
@@ -22,7 +22,23 @@
       </file>
     </package>
     <package name="src.database">
-      <metrics statements="84" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
+      <metrics statements="97" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="0"/>
+      <file name="MongoQueries.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/database/MongoQueries.ts">
+        <metrics statements="13" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
       <file name="queries.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/database/queries.ts">
         <metrics statements="84" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -152,6 +168,55 @@
         <line num="17" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="src.mongoDB">
+      <metrics statements="17" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="mongoClient.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/mongoDB/mongoClient.ts">
+        <metrics statements="17" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.mongoRepositories">
+      <metrics statements="20" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="UsersRepository.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/mongoRepositories/UsersRepository.ts">
+        <metrics statements="20" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+    </package>
     <package name="src.prisma">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="postgresqlClient.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/prisma/postgresqlClient.ts">
@@ -224,9 +289,9 @@
       </file>
     </package>
     <package name="src.usecases">
-      <metrics statements="123" coveredstatements="92" conditionals="24" coveredconditionals="16" methods="12" coveredmethods="11"/>
+      <metrics statements="123" coveredstatements="88" conditionals="23" coveredconditionals="15" methods="12" coveredmethods="10"/>
       <file name="authenticateUserUC.ts" path="/home/isaquenogueira/Documentos/Projects/NGCASH_BACKEND/src/usecases/authenticateUserUC.ts">
-        <metrics statements="39" coveredstatements="35" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <metrics statements="39" coveredstatements="31" conditionals="5" coveredconditionals="2" methods="3" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -241,11 +306,11 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="22" count="1" type="stmt"/>

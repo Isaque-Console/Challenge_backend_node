@@ -3,12 +3,12 @@ import { mongoCollection } from "../mongoDB/mongoClient";
 import { Users, UsersProps } from "../entities/users";
 
 export interface IUsersRepository {
-    getUserByUsername(username: string): Promise<Users | undefined>;
+    getUserByUsername(username: string): Promise<any>;
     createUser(props: UsersProps): Promise<Users | undefined>;
 }
 
 export class UsersRepository implements IUsersRepository {
-    async getUserByUsername(username: string): Promise<Users | undefined> {
+    async getUserByUsername(username: string): Promise<any> {
         const collection: any = await mongoCollection('users');
         const queries: MongoQueries = new MongoQueries();
         return await queries.getUserByUsername(username, collection);
