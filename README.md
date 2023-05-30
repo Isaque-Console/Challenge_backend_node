@@ -18,7 +18,7 @@ Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma 
 - Containerização
 - Testes unitários
 - In memory database
-- Design pattern (Strategy e um pouco de Factory Method)
+- Design pattern (Strategy e Factory Method)
 - Autenticação
 - Autorização
 - POO
