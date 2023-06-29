@@ -1,4 +1,4 @@
-import { createAccountUC } from '../../src/usecases/createAccountsUC'
+import { CreateAccountUC } from '../../src/usecases/createAccountsUC'
 import { InMemoryAccountsRepository } from '../inMemory/in-memory-accounts-repository';
 
 describe("Create Accounts entity", () => {
@@ -6,7 +6,7 @@ describe("Create Accounts entity", () => {
         // given no balance
 
         // when the create method is invoked
-        const useCase = new createAccountUC(new InMemoryAccountsRepository());
+        const useCase = new CreateAccountUC(new InMemoryAccountsRepository());
         const account = await useCase.create({ balance: 100 });
 
         // then the method should return an Accounts object

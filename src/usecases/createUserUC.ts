@@ -2,7 +2,7 @@ import { IUser, Users, UsersProps } from "../entities/users";
 import { UsersRepository } from "../repositories/usersRepository";
 import bcrypt from "bcrypt";
 import { Accounts } from "../entities/accounts";
-import { createAccountUC } from "./createAccountsUC";
+import { CreateAccountUC } from "./createAccountsUC";
 import { AccountsRepository } from "../repositories/accountsRepository";
 
 export class CreateUserUC implements IUser {
@@ -50,11 +50,11 @@ export class CreateUserUC implements IUser {
     }
 
     async execute(userProps: UsersProps, userId?: string): Promise<Users> {
-        let createAccountUseCase: createAccountUC;
+        let createAccountUseCase: CreateAccountUC;
         let account: Accounts;
         let accountId: string;
         if (!userProps.accountId) {
-            createAccountUseCase = new createAccountUC(new AccountsRepository());
+            createAccountUseCase = new CreateAccountUC(new AccountsRepository());
             account = await createAccountUseCase.create();
             accountId = account.id
         } else {

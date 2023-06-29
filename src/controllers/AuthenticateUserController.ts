@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { AuthenticateUserUC } from '../usecases/authenticateUserUC';
-// import { UsersRepository } from '../repositories/usersRepository';
 import { UsersRepository } from '../mongoRepositories/UsersRepository';
 
 export class AuthenticateUserController {
@@ -8,7 +7,6 @@ export class AuthenticateUserController {
         try {
             const { username, password } = request.body;
             
-            // const repository: UsersRepository = new UsersRepository();
             const repository: UsersRepository = new UsersRepository();
             const useCase = new AuthenticateUserUC(repository);
             const authenticatedUser: any = await useCase.execute({ username, password });

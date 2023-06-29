@@ -14,6 +14,7 @@ class MongoQueries {
     getItemById(id, collection) {
         return __awaiter(this, void 0, void 0, function* () {
             const findResult = yield collection.find({ id }).toArray();
+            return findResult;
         });
     }
     getUserByUsername(username, collection) {

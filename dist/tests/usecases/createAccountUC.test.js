@@ -15,7 +15,7 @@ describe("Create Accounts entity", () => {
     it("Should return a new instace of Accounts with balance to equal 100.00", () => __awaiter(void 0, void 0, void 0, function* () {
         // given no balance
         // when the create method is invoked
-        const useCase = new createAccountsUC_1.createAccountUC(new in_memory_accounts_repository_1.InMemoryAccountsRepository());
+        const useCase = new createAccountsUC_1.CreateAccountUC(new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const account = yield useCase.create({ balance: 100 });
         // then the method should return an Accounts object
         expect(account.props.balance).toBe(100);

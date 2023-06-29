@@ -1,3 +1,5 @@
+import { log } from "console";
+
 export class Queries {
     async getItemById(id: string, prismaClient: any): Promise<any> {
         return await prismaClient.findFirst({
@@ -15,7 +17,7 @@ export class Queries {
         const user: any = await userPrismaClient.findFirst({
             where: { id: userId }
         });
-
+        
         if (!user) throw new Error("Não existe usuário com esse Id");
 
         return await accountPrismaClient.findFirst({

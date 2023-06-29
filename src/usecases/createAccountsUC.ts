@@ -2,7 +2,7 @@ import { IAccounts, Accounts, AccountsProps } from "../entities/accounts";
 import { IAccountsRepository } from "../repositories/accountsRepository";
 
 
-export class createAccountUC implements IAccounts {
+export class CreateAccountUC implements IAccounts {
     constructor(
         private accountsRepository: IAccountsRepository,
     ) { }

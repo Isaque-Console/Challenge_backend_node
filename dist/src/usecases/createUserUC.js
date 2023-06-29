@@ -67,7 +67,7 @@ class CreateUserUC {
             let account;
             let accountId;
             if (!userProps.accountId) {
-                createAccountUseCase = new createAccountsUC_1.createAccountUC(new accountsRepository_1.AccountsRepository());
+                createAccountUseCase = new createAccountsUC_1.CreateAccountUC(new accountsRepository_1.AccountsRepository());
                 account = yield createAccountUseCase.create();
                 accountId = account.id;
             }

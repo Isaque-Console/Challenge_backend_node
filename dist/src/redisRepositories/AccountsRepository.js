@@ -9,21 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateAccountUC = void 0;
-const accounts_1 = require("../entities/accounts");
-class CreateAccountUC {
-    constructor(accountsRepository) {
-        this.accountsRepository = accountsRepository;
-    }
-    create(props, id) {
+exports.AccountsRepository = void 0;
+const RedisQueries_1 = require("../database/RedisQueries");
+const RedisClient_1 = require("../redis/RedisClient");
+class AccountsRepository {
+    getAccountByKey(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            const account = new accounts_1.Accounts(Object.assign(Object.assign({}, props), { balance: 100 }), id);
-            const result = yield this.accountsRepository.createAccount(account);
+            const queries = new RedisQueries_1.RedisQueries();
+            const result = yield queries.getAccountByUserId(key, RedisClient_1.redisClient);
+            return result;
+        });
+    }
+    createAccountWithUserId(props, key) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queries = new RedisQueries_1.RedisQueries();
+            const result = yield queries.createUser(key, props, RedisClient_1.redisClient);
             if (!result)
-                throw new Error("Erro ao criar conta no banco de dados");
+                throw new Error("Create account cache error.");
             return result;
         });
     }
 }
-exports.CreateAccountUC = CreateAccountUC;
-//# sourceMappingURL=createAccountsUC.js.map
+exports.AccountsRepository = AccountsRepository;
+//# sourceMappingURL=AccountsRepository.js.map
