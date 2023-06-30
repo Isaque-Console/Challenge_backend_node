@@ -3,11 +3,17 @@ import { Users, UsersProps } from '../entities/users';
 import { postgresqlClient } from '../prisma/postgresqlClient';
 
 export interface IUsersRepository {
+    getUserById(userId: string): Promise<any>;
     getUserByUsername(username: string): Promise<Users | undefined>;
     createUser(props: UsersProps): Promise<Users | undefined>;
 }
 
 export class UsersRepository implements IUsersRepository {
+    async getUserById(userId: string): Promise<any> {
+        const queries: Queries = new Queries();
+        return await queries.getItemById(userId, postgresqlClient.users);
+    }
+
     async getUserByUsername(username: string): Promise<Users | undefined> {
         const queries: Queries = new Queries();
         return await queries.getUserByUsername(username, postgresqlClient.users);

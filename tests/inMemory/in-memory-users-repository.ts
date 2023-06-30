@@ -2,6 +2,9 @@ import { Users, UsersProps } from "../../src/entities/users";
 import { UsersRepository } from "../../src/repositories/usersRepository";
 
 export class InMemoryUsersRepository implements UsersRepository {
+    getUserById(userId: string): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
     getUserByUsername(username: string): Promise<Users> {
         throw new Error("Method not implemented.");
     }

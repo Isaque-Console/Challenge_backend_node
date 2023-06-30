@@ -1,20 +1,13 @@
 import { Request, Response } from 'express';
 import { AccountsRepository as AccountsPostgresRepository } from '../repositories/accountsRepository';
 import { Accounts } from '../entities/accounts';
-import { AccountsRepository as AccountsRedisRepository } from '../redisRepositories/AccountsRepository';
-import { GetAccountCacheUC } from '../usecases/GetAccountCacheUC';
 import { GetAccountUC } from '../usecases/GetAccountUC';
 
 export class GetBalanceController {
     async handle(request: Request, response: Response): Promise<Response> {
         try {
             const { userId } = request.params;
-            const accountsRedisRepository: AccountsRedisRepository = new AccountsRedisRepository();
-            const getAccountCacheUC: GetAccountCacheUC = new GetAccountCacheUC(accountsRedisRepository);
-            const accountCache: Accounts = await getAccountCacheUC.getAccountByUserId(userId);
-
-            if (accountCache) return response.status(200).json(accountCache);
-
+            
             const accountsPostgresRepository: AccountsPostgresRepository = new AccountsPostgresRepository();
             const getAccountUC: GetAccountUC = new GetAccountUC(accountsPostgresRepository);
             const account: Accounts = await getAccountUC.getAccountByUserId(userId);

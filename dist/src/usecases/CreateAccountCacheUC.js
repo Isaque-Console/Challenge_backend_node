@@ -23,7 +23,7 @@ class CreateAccountCacheUC {
                 return accountAlredyExists;
             const getAccountUC = new GetAccountUC_1.GetAccountUC(this.accountsPostgresRepository);
             const account = yield getAccountUC.getAccountByUserId(userId);
-            const createdAccount = yield this.accountsRepository.createAccountWithUserId(JSON.stringify({ balance: account.balance, test: "teeeest" }), `account-${userId}`);
+            const createdAccount = yield this.accountsRepository.createAccountWithUserId(JSON.stringify({ id: account.id, balance: account.balance }), `account-${userId}`);
             if (!createdAccount)
                 throw new Error("Create account cache error.");
             return createdAccount;

@@ -13,6 +13,13 @@ exports.UsersRepository = void 0;
 const MongoQueries_1 = require("../database/MongoQueries");
 const mongoClient_1 = require("../mongoDB/mongoClient");
 class UsersRepository {
+    getUserById(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield (0, mongoClient_1.mongoCollection)('users');
+            const queries = new MongoQueries_1.MongoQueries();
+            return yield queries.getItemById(userId, collection);
+        });
+    }
     getUserByUsername(username) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield (0, mongoClient_1.mongoCollection)('users');

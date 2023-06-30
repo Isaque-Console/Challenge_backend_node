@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthenticateUserController = void 0;
 const authenticateUserUC_1 = require("../usecases/authenticateUserUC");
 const UsersRepository_1 = require("../mongoRepositories/UsersRepository");
+const UsersRepository_2 = require("../redisRepositories/UsersRepository");
 class AuthenticateUserController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { username, password } = request.body;
-                const repository = new UsersRepository_1.UsersRepository();
-                const useCase = new authenticateUserUC_1.AuthenticateUserUC(repository);
+                const useCase = new authenticateUserUC_1.AuthenticateUserUC(new UsersRepository_2.UsersRepository(), new UsersRepository_1.UsersRepository());
                 const authenticatedUser = yield useCase.execute({ username, password });
                 return response.status(200).json(authenticatedUser);
             }

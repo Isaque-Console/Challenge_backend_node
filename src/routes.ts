@@ -6,9 +6,11 @@ import { FinancialTransactionController } from "./controllers/FinancialTransacti
 import { ensureAuthenticatedAndAuthorized } from "./middlewares/ensureAuthenticatedAndAuthorized";
 import { GetUserTransactionsController } from "./controllers/GetUserTransactionsController";
 import { GetFilteredTransactionsController } from "./controllers/GetFilteredTransactionsController";
+import { GetUserController } from "./controllers/GetUserController";
 
 const router = Router();
 
+router.get("/user/:userId", ensureAuthenticatedAndAuthorized, new GetUserController().handle);
 router.get("/account/:userId", ensureAuthenticatedAndAuthorized, new GetBalanceController().handle);
 router.get("/transactions/:userId", ensureAuthenticatedAndAuthorized, new GetUserTransactionsController().handle);
 router.get("/transactions/filter/:userId", ensureAuthenticatedAndAuthorized, new GetFilteredTransactionsController().handle);

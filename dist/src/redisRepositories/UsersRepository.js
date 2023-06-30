@@ -9,27 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUserUC = void 0;
-class GetUserUC {
-    constructor(usersRepository) {
-        this.usersRepository = usersRepository;
-    }
-    getUserById(userId) {
+exports.UsersRepository = void 0;
+const RedisQueries_1 = require("../database/RedisQueries");
+const RedisClient_1 = require("../redis/RedisClient");
+class UsersRepository {
+    getUserByKey(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.usersRepository.getUserById(userId);
-            if (!result)
-                throw new Error("Não existe usuario com esse Id.");
+            const queries = new RedisQueries_1.RedisQueries();
+            const result = yield queries.getItemById(`user-${userId}`, RedisClient_1.redisClient);
             return result;
         });
     }
-    getUserByUsername(username) {
+    create(props, userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.usersRepository.getUserByUsername(username);
+            const queries = new RedisQueries_1.RedisQueries();
+            const result = yield queries.createUser(`user-${userId}`, props, RedisClient_1.redisClient);
             if (!result)
-                throw new Error("Não existe usuario com esse username.");
+                throw new Error("Create account cache error.");
             return result;
         });
     }
 }
-exports.GetUserUC = GetUserUC;
-//# sourceMappingURL=GetUserUC.js.map
+exports.UsersRepository = UsersRepository;
+//# sourceMappingURL=UsersRepository.js.map

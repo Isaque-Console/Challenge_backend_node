@@ -1,5 +1,7 @@
 import { UsersRepository } from "../../src/mongoRepositories/UsersRepository";
 import { AuthenticateUserUC } from "../../src/usecases/authenticateUserUC";
+import { UsersRepository as UsersCacheRepository } from '../../src/redisRepositories/UsersRepository';
+
 
 beforeAll(() => {
     jest.spyOn(AuthenticateUserUC.prototype, 'passswordMatch').mockImplementation(() => Promise.resolve(true));
@@ -23,7 +25,7 @@ describe("execute tests", () => {
         // given a valid username and valid password
 
         // when invoke the execute method
-        const useCase: AuthenticateUserUC = new AuthenticateUserUC(new UsersRepository());
+        const useCase: AuthenticateUserUC = new AuthenticateUserUC(new UsersCacheRepository(), new UsersRepository());
         const result: any = await useCase.execute({ username: validUsername, password: validPassword });
         // then the result should be user infos
         // expect(result.token).toBe("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFiMmEyYmU5YzE0NDI0YWViYjY1ODgiLCJpYXQiOjE2Nzk3NzA2MDksImV4cCI6MTY3OTg1NzAwOSwic3ViIjoiNjQxYjJhMmJlOWMxNDQyNGFlYmI2NTg4In0.-5xO6UqFgO3jNzPqy8LNNMUDQfSZZNusmTuV6qMUrJc");

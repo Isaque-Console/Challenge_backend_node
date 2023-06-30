@@ -10,24 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetAccountCacheUC = void 0;
-const GetAccountUC_1 = require("./GetAccountUC");
 class GetAccountCacheUC {
-    constructor(accountsRepository, accountsPostgresRepository) {
+    constructor(accountsRepository) {
         this.accountsRepository = accountsRepository;
-        this.accountsPostgresRepository = accountsPostgresRepository;
     }
     getAccountByUserId(userId) {
         return __awaiter(this, void 0, void 0, function* () {
             const accountCache = yield this.accountsRepository.getAccountByKey(`account-${userId}`);
-            if (accountCache) {
-                console.log("Fetching cache in redis.");
-                return JSON.parse(accountCache);
-            }
-            const getAccountUC = new GetAccountUC_1.GetAccountUC(this.accountsPostgresRepository);
-            const account = yield getAccountUC.getAccountByUserId(userId);
-            if (!account)
-                throw new Error("Get account error in database.");
-            return account;
+            console.log("Fetching cache in redis.");
+            return JSON.parse(accountCache);
         });
     }
 }

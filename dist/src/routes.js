@@ -9,8 +9,10 @@ const FinancialTransactionController_1 = require("./controllers/FinancialTransac
 const ensureAuthenticatedAndAuthorized_1 = require("./middlewares/ensureAuthenticatedAndAuthorized");
 const GetUserTransactionsController_1 = require("./controllers/GetUserTransactionsController");
 const GetFilteredTransactionsController_1 = require("./controllers/GetFilteredTransactionsController");
+const GetUserController_1 = require("./controllers/GetUserController");
 const router = (0, express_1.Router)();
 exports.router = router;
+router.get("/user/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new GetUserController_1.GetUserController().handle);
 router.get("/account/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new GetBalanceController_1.GetBalanceController().handle);
 router.get("/transactions/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new GetUserTransactionsController_1.GetUserTransactionsController().handle);
 router.get("/transactions/filter/:userId", ensureAuthenticatedAndAuthorized_1.ensureAuthenticatedAndAuthorized, new GetFilteredTransactionsController_1.GetFilteredTransactionsController().handle);

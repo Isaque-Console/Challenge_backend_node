@@ -14,6 +14,12 @@ const queries_1 = require("../database/queries");
 const users_1 = require("../entities/users");
 const postgresqlClient_1 = require("../prisma/postgresqlClient");
 class UsersRepository {
+    getUserById(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queries = new queries_1.Queries();
+            return yield queries.getItemById(userId, postgresqlClient_1.postgresqlClient.users);
+        });
+    }
     getUserByUsername(username) {
         return __awaiter(this, void 0, void 0, function* () {
             const queries = new queries_1.Queries();

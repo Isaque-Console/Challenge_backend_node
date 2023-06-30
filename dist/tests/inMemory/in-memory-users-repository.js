@@ -31,6 +31,9 @@ class InMemoryUsersRepository {
             })
         ];
     }
+    getUserById(userId) {
+        throw new Error("Method not implemented.");
+    }
     getUserByUsername(username) {
         throw new Error("Method not implemented.");
     }

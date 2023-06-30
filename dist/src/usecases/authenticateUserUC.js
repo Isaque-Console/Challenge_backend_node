@@ -12,11 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthenticateUserUC = void 0;
 const GenerateTokenProvider_1 = require("../provider/GenerateTokenProvider");
 const bcryptjs_1 = require("bcryptjs");
-const CreateAccountCacheUC_1 = require("./CreateAccountCacheUC");
-const AccountsRepository_1 = require("../redisRepositories/AccountsRepository");
-const accountsRepository_1 = require("../repositories/accountsRepository");
+const CreateUserCacheUC_1 = require("./CreateUserCacheUC");
 class AuthenticateUserUC {
-    constructor(usersRepository) {
+    constructor(usersCacheRepository, usersRepository) {
+        this.usersCacheRepository = usersCacheRepository;
         this.usersRepository = usersRepository;
     }
     passswordMatch(password, hashedPassword) {
@@ -35,10 +34,8 @@ class AuthenticateUserUC {
             if (!passswordMatch) {
                 throw new Error("Nome de usuário ou senha incorreto!");
             }
-            const accountsRedisRepository = new AccountsRepository_1.AccountsRepository();
-            const accountsPostgresRepository = new accountsRepository_1.AccountsRepository();
-            const createAccountCacheUC = new CreateAccountCacheUC_1.CreateAccountCacheUC(accountsRedisRepository, accountsPostgresRepository);
-            yield createAccountCacheUC.createAccountWithUserId(userAlreadyExists._id);
+            const createAccountCacheUC = new CreateUserCacheUC_1.CreateUserCacheUC(this.usersCacheRepository, this.usersRepository);
+            yield createAccountCacheUC.create(userAlreadyExists._id);
             const generateTokenProvider = new GenerateTokenProvider_1.GenerateTokenProvider();
             const token = yield generateTokenProvider.execute(userAlreadyExists._id);
             return { token, user: userAlreadyExists };

@@ -9,27 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUserUC = void 0;
-class GetUserUC {
+exports.GetUserCacheUC = void 0;
+class GetUserCacheUC {
     constructor(usersRepository) {
         this.usersRepository = usersRepository;
     }
     getUserById(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.usersRepository.getUserById(userId);
-            if (!result)
-                throw new Error("Não existe usuario com esse Id.");
-            return result;
-        });
-    }
-    getUserByUsername(username) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.usersRepository.getUserByUsername(username);
-            if (!result)
-                throw new Error("Não existe usuario com esse username.");
-            return result;
+            const userCache = yield this.usersRepository.getUserByKey(`user-${userId}`);
+            console.log("Fetching cache in redis.");
+            return JSON.parse(userCache);
         });
     }
 }
-exports.GetUserUC = GetUserUC;
-//# sourceMappingURL=GetUserUC.js.map
+exports.GetUserCacheUC = GetUserCacheUC;
+//# sourceMappingURL=GetUserCacheUC.js.map

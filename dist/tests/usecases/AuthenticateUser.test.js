@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const UsersRepository_1 = require("../../src/mongoRepositories/UsersRepository");
 const authenticateUserUC_1 = require("../../src/usecases/authenticateUserUC");
+const UsersRepository_2 = require("../../src/redisRepositories/UsersRepository");
 beforeAll(() => {
     jest.spyOn(authenticateUserUC_1.AuthenticateUserUC.prototype, 'passswordMatch').mockImplementation(() => Promise.resolve(true));
     jest.spyOn(UsersRepository_1.UsersRepository.prototype, 'getUserByUsername').mockImplementation(() => Promise.resolve({
@@ -29,7 +30,7 @@ describe("execute tests", () => {
     it("Should return user infos and token", () => __awaiter(void 0, void 0, void 0, function* () {
         // given a valid username and valid password
         // when invoke the execute method
-        const useCase = new authenticateUserUC_1.AuthenticateUserUC(new UsersRepository_1.UsersRepository());
+        const useCase = new authenticateUserUC_1.AuthenticateUserUC(new UsersRepository_2.UsersRepository(), new UsersRepository_1.UsersRepository());
         const result = yield useCase.execute({ username: validUsername, password: validPassword });
         // then the result should be user infos
         // expect(result.token).toBe("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFiMmEyYmU5YzE0NDI0YWViYjY1ODgiLCJpYXQiOjE2Nzk3NzA2MDksImV4cCI6MTY3OTg1NzAwOSwic3ViIjoiNjQxYjJhMmJlOWMxNDQyNGFlYmI2NTg4In0.-5xO6UqFgO3jNzPqy8LNNMUDQfSZZNusmTuV6qMUrJc");

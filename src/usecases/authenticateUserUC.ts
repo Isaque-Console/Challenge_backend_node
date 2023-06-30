@@ -1,10 +1,8 @@
 import { GenerateTokenProvider } from "../provider/GenerateTokenProvider";
-import { UsersRepository } from "../repositories/usersRepository";
 import { compare } from "bcryptjs";
-import { CreateAccountCacheUC } from "./CreateAccountCacheUC";
-import { AccountsRepository as AccountsRedisRepository } from "../redisRepositories/AccountsRepository";
-import { AccountsRepository as AccountsPostgresRedisRepository } from "../repositories/accountsRepository";
-import { log } from "console";
+import { CreateUserCacheUC } from "./CreateUserCacheUC";
+import { IUsersRepository as IUsersCacheRepository } from "../redisRepositories/UsersRepository";
+import { IUsersRepository } from "../repositories/usersRepository";
 
 interface IRequest {
     username: string;
@@ -13,7 +11,8 @@ interface IRequest {
 
 export class AuthenticateUserUC {
     constructor(
-        private usersRepository: UsersRepository
+        private usersCacheRepository: IUsersCacheRepository,
+        private usersRepository: IUsersRepository
     ) { }
 
     async passswordMatch(password: string, hashedPassword: string): Promise<boolean> {
@@ -35,10 +34,8 @@ export class AuthenticateUserUC {
             throw new Error("Nome de usuário ou senha incorreto!");
         }
 
-        const accountsRedisRepository: AccountsRedisRepository = new AccountsRedisRepository();
-        const accountsPostgresRepository: AccountsPostgresRedisRepository = new AccountsPostgresRedisRepository();
-        const createAccountCacheUC: CreateAccountCacheUC = new CreateAccountCacheUC(accountsRedisRepository, accountsPostgresRepository);        
-        await createAccountCacheUC.createAccountWithUserId(userAlreadyExists._id);
+        const createAccountCacheUC: CreateUserCacheUC = new CreateUserCacheUC(this.usersCacheRepository, this.usersRepository);        
+        await createAccountCacheUC.create(userAlreadyExists._id);
 
         const generateTokenProvider = new GenerateTokenProvider();
         const token: string = await generateTokenProvider.execute(userAlreadyExists._id);

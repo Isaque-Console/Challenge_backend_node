@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedisQueries = void 0;
 const util_1 = require("util");
 class RedisQueries {
-    getAccountByUserId(key, redisClient) {
+    getItemById(key, redisClient) {
         const syncRedisGet = (0, util_1.promisify)(redisClient.get).bind(redisClient);
         return syncRedisGet(key);
     }

@@ -13,7 +13,7 @@ exports.MongoQueries = void 0;
 class MongoQueries {
     getItemById(id, collection) {
         return __awaiter(this, void 0, void 0, function* () {
-            const findResult = yield collection.find({ id }).toArray();
+            const findResult = yield collection.findOne({ _id: id });
             return findResult;
         });
     }
