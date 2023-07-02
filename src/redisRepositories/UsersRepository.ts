@@ -2,7 +2,7 @@ import { RedisQueries } from "../database/RedisQueries";
 import { redisClient } from "../redis/RedisClient";
 
 export interface IUsersRepository {
-    getUserByKey(key: string): Promise<any>;
+    getUserByKey(userId: string): Promise<any>;
     create(props: string, key: string): Promise<any>;
 }
 
