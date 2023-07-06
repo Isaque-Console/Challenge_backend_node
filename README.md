@@ -6,6 +6,7 @@ Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma 
 - Docker
 - Docker-compose
 - Dockerize
+- Redis
 - Node.js
 - Typescript
 - Jest
@@ -16,12 +17,13 @@ Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma 
 
 ### Conceitos utilizados:
 - Containerização
+- Cache
 - Testes unitários
 - In memory database
 - Design pattern (Strategy e Factory Method)
 - Autenticação
 - Autorização
-- POO
+- OOP
 - Clean Arch
 - Clean Code
 - SOLID
@@ -44,207 +46,233 @@ Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma 
 ### Postman collection
 
     {
-    	"info": {
-    		"_postman_id": "55cefbcd-c137-407b-a980-f9ba0806915a",
-    		"name": "Challenge",
-    		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    		"_exporter_id": "11884482"
-    	},
-    	"item": [
-    		{
-    			"name": "Get balance",
-    			"request": {
-    				"auth": {
-    					"type": "bearer",
-    					"bearer": [
-    						{
-    							"key": "token",
-    							"value": "",
-    							"type": "string"
-    						}
-    					]
-    				},
-    				"method": "GET",
-    				"header": [
-    					{
-    						"key": "authorization",
-    						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmOTg3Nzk3ZS1kZDNkLTRiODYtOThjNy1jYjNiMzQ4NGQ1NjQiLCJpYXQiOjE2NzQ1MDExNjcsImV4cCI6MTY3NDU4NzU2Nywic3ViIjoiZjk4Nzc5N2UtZGQzZC00Yjg2LTk4YzctY2IzYjM0ODRkNTY0In0.Aaz621cN6ORThZpcynmfYgahezk69CccEoVAZK9XZiY",
-    						"type": "text"
-    					}
-    				],
-    				"url": {
-    					"raw": "http://localhost:3000/account/f987797e-dd3d-4b86-98c7-cb3b3484d564",
-    					"protocol": "http",
-    					"host": [
-    						"localhost"
-    					],
-    					"port": "3000",
-    					"path": [
-    						"account",
-    						"f987797e-dd3d-4b86-98c7-cb3b3484d564"
-    					]
-    				}
-    			},
-    			"response": []
-    		},
-    		{
-    			"name": "User transactions",
-    			"request": {
-    				"method": "GET",
-    				"header": [
-    					{
-    						"key": "authorization",
-    						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzQwNTM5NDIsImV4cCI6MTY3NDE0MDM0Miwic3ViIjoiZjk4Nzc5N2UtZGQzZC00Yjg2LTk4YzctY2IzYjM0ODRkNTY0In0.LtCItJagiE-N-KBuZsDkrgGQyaOxzwz1fV8MNCSMMHs",
-    						"type": "text"
-    					}
-    				],
-    				"url": {
-    					"raw": "http://localhost:3000/transactions/87e7319e-7b06-4185-8a2a-d685b3227e77",
-    					"protocol": "http",
-    					"host": [
-    						"localhost"
-    					],
-    					"port": "3000",
-    					"path": [
-    						"transactions",
-    						"87e7319e-7b06-4185-8a2a-d685b3227e77"
-    					]
-    				}
-    			},
-    			"response": []
-    		},
-    		{
-    			"name": "Filtered transactions",
-    			"protocolProfileBehavior": {
-    				"disableBodyPruning": true
-    			},
-    			"request": {
-    				"method": "GET",
-    				"header": [
-    					{
-    						"key": "authorization",
-    						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzQwNjI4MDQsImV4cCI6MTY3NDE0OTIwNCwic3ViIjoiZjk4Nzc5N2UtZGQzZC00Yjg2LTk4YzctY2IzYjM0ODRkNTY0In0.FxdcI2X1P7mIiTEQTWCzeqtXGlTURcsyX0nx-fUkfbM",
-    						"type": "text"
-    					}
-    				],
-    				"body": {
-    					"mode": "raw",
-    					"raw": "{\n    \"tag\": \"CashOut\",\n    \"date\": \"2023-01-17\"\n}",
-    					"options": {
-    						"raw": {
-    							"language": "json"
-    						}
-    					}
-    				},
-    				"url": {
-    					"raw": "http://localhost:3000/transactions/filter/87e7319e-7b06-4185-8a2a-d685b3227e77",
-    					"protocol": "http",
-    					"host": [
-    						"localhost"
-    					],
-    					"port": "3000",
-    					"path": [
-    						"transactions",
-    						"filter",
-    						"87e7319e-7b06-4185-8a2a-d685b3227e77"
-    					]
-    				}
-    			},
-    			"response": []
-    		},
-    		{
-    			"name": "CreateUser",
-    			"request": {
-    				"method": "POST",
-    				"header": [],
-    				"body": {
-    					"mode": "raw",
-    					"raw": "{\n    \"userId\": null,\n    \"username\": \"Usuário8\",\n    \"password\": \"Senha1234\",\n    \"accountId\": null\n}",
-    					"options": {
-    						"raw": {
-    							"language": "json"
-    						}
-    					}
-    				},
-    				"url": {
-    					"raw": "http://localhost:3000/users",
-    					"protocol": "http",
-    					"host": [
-    						"localhost"
-    					],
-    					"port": "3000",
-    					"path": [
-    						"users"
-    					]
-    				}
-    			},
-    			"response": []
-    		},
-    		{
-    			"name": "Authenticate User",
-    			"request": {
-    				"method": "POST",
-    				"header": [],
-    				"body": {
-    					"mode": "raw",
-    					"raw": "{\n    \"username\": \"Usuário4\",\n    \"password\": \"Senha1234\"\n}",
-    					"options": {
-    						"raw": {
-    							"language": "json"
-    						}
-    					}
-    				},
-    				"url": {
-    					"raw": "http://localhost:3000/login",
-    					"protocol": "http",
-    					"host": [
-    						"localhost"
-    					],
-    					"port": "3000",
-    					"path": [
-    						"login"
-    					]
-    				}
-    			},
-    			"response": []
-    		},
-    		{
-    			"name": "Financial Transaction",
-    			"request": {
-    				"method": "PUT",
-    				"header": [
-    					{
-    						"key": "authorization",
-    						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzQxMzcxNDQsImV4cCI6MTY3NDIyMzU0NCwic3ViIjoiZjk4Nzc5N2UtZGQzZC00Yjg2LTk4YzctY2IzYjM0ODRkNTY0In0.X4onze0pRHWiyw2DOt3cqfwtz79sYCO8fhVkJWd5IH0",
-    						"type": "text"
-    					}
-    				],
-    				"body": {
-    					"mode": "raw",
-    					"raw": "{\n    \"payeeUsername\": \"Usuário4\",\n    \"transferAmount\": 11.00\n}",
-    					"options": {
-    						"raw": {
-    							"language": "json"
-    						}
-    					}
-    				},
-    				"url": {
-    					"raw": "http://localhost:3000/transaction/30772ed8-bc87-4e60-8024-424937f2e947",
-    					"protocol": "http",
-    					"host": [
-    						"localhost"
-    					],
-    					"port": "3000",
-    					"path": [
-    						"transaction",
-    						"30772ed8-bc87-4e60-8024-424937f2e947"
-    					]
-    				}
-    			},
-    			"response": []
-    		}
-    	]
-    }
+	"info": {
+		"_postman_id": "55cefbcd-c137-407b-a980-f9ba0806915a",
+		"name": "Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11884482"
+	},
+	"item": [
+		{
+			"name": "Get user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFiMmEyYmU5YzE0NDI0YWViYjY1ODgiLCJpYXQiOjE2ODg2MTM2NTYsImV4cCI6MTY4ODcwMDA1Niwic3ViIjoiNjQxYjJhMmJlOWMxNDQyNGFlYmI2NTg4In0.CDs5XeWUDzytzJRij6uqWxy1lngTG7rp1F1_cC3woFY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/user/641b2a2be9c14424aebb6588",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"641b2a2be9c14424aebb6588"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFiMmEyYmU5YzE0NDI0YWViYjY1ODgiLCJpYXQiOjE2ODg2MTM2NTYsImV4cCI6MTY4ODcwMDA1Niwic3ViIjoiNjQxYjJhMmJlOWMxNDQyNGFlYmI2NTg4In0.CDs5XeWUDzytzJRij6uqWxy1lngTG7rp1F1_cC3woFY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/account/641b2a2be9c14424aebb6588",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"account",
+						"641b2a2be9c14424aebb6588"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User transactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFiMmEyYmU5YzE0NDI0YWViYjY1ODgiLCJpYXQiOjE2ODg2MTM2NTYsImV4cCI6MTY4ODcwMDA1Niwic3ViIjoiNjQxYjJhMmJlOWMxNDQyNGFlYmI2NTg4In0.CDs5XeWUDzytzJRij6uqWxy1lngTG7rp1F1_cC3woFY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/transactions/641b2a2be9c14424aebb6588",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"641b2a2be9c14424aebb6588"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtered transactions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzQwNjI4MDQsImV4cCI6MTY3NDE0OTIwNCwic3ViIjoiZjk4Nzc5N2UtZGQzZC00Yjg2LTk4YzctY2IzYjM0ODRkNTY0In0.FxdcI2X1P7mIiTEQTWCzeqtXGlTURcsyX0nx-fUkfbM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tag\": \"CashOut\",\n    \"date\": \"2023-01-17\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/filter/87e7319e-7b06-4185-8a2a-d685b3227e77",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"filter",
+						"87e7319e-7b06-4185-8a2a-d685b3227e77"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"641b2a2be9c14424aebb6588\",\n    \"username\": \"Usuário4\",\n    \"password\": \"Senha1234\",\n    \"accountId\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Usuário4\",\n    \"password\": \"Senha1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Financial Transaction",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzQxMzcxNDQsImV4cCI6MTY3NDIyMzU0NCwic3ViIjoiZjk4Nzc5N2UtZGQzZC00Yjg2LTk4YzctY2IzYjM0ODRkNTY0In0.X4onze0pRHWiyw2DOt3cqfwtz79sYCO8fhVkJWd5IH0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"payeeUsername\": \"Usuário4\",\n    \"transferAmount\": 11.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transaction/30772ed8-bc87-4e60-8024-424937f2e947",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transaction",
+						"30772ed8-bc87-4e60-8024-424937f2e947"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
 
 ### Diagrama de fluxo (Exemplo de fluxo)
 
