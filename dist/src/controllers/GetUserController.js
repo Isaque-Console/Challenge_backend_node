@@ -20,16 +20,20 @@ class GetUserController {
             try {
                 const { userId } = request.params;
                 // using redis
+                console.time();
                 const usersRedisRepository = new UsersRepository_1.UsersRepository();
                 const getUserCacheUC = new GetUserCacheUC_1.GetUserCacheUC(usersRedisRepository);
                 const userCache = yield getUserCacheUC.getUserById(userId);
+                console.timeEnd();
                 if (userCache)
                     return response.status(200).json(userCache);
                 console.log("There is nothing in cache, so fetching datas in other database.");
                 // using postgres
+                console.time();
                 const usersPostgresRepository = new usersRepository_1.UsersRepository();
                 const getUserUC = new GetUserUC_1.GetUserUC(usersPostgresRepository);
                 const user = yield getUserUC.getUserById(userId);
+                console.timeEnd();
                 return response.status(200).json(user);
             }
             catch (error) {

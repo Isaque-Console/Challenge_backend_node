@@ -23,6 +23,12 @@ class MongoQueries {
             return authenticatedUser;
         });
     }
+    createItem(item, collection) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const authenticatedUser = yield collection.insertOne(Object.assign({}, item));
+            return authenticatedUser;
+        });
+    }
 }
 exports.MongoQueries = MongoQueries;
 //# sourceMappingURL=MongoQueries.js.map

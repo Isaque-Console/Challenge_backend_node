@@ -5,7 +5,7 @@ import { postgresqlClient } from '../prisma/postgresqlClient';
 export interface IUsersRepository {
     getUserById(userId: string): Promise<any>;
     getUserByUsername(username: string): Promise<Users | undefined>;
-    createUser(props: UsersProps): Promise<Users | undefined>;
+    createUser(props: UsersProps, id?: string): Promise<Users | undefined>;
 }
 
 export class UsersRepository implements IUsersRepository {

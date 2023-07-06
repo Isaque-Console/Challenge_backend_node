@@ -12,4 +12,10 @@ export class MongoQueries {
 
         return authenticatedUser
     }
+
+    async createItem(item: any, collection: Collection<any>): Promise<any> {
+        const authenticatedUser = await collection.insertOne({...item});
+
+        return authenticatedUser
+    }
 }

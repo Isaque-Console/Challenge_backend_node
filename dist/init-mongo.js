@@ -9,17 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mongoCollection = void 0;
-const mongodb_1 = require("mongodb");
-const url = process.env.MONGO_URL;
-const client = new mongodb_1.MongoClient(url);
-const dbName = 'financial_bank';
-const mongoCollection = (tableName) => __awaiter(void 0, void 0, void 0, function* () {
-    const connect = yield client.connect();
-    console.log('Connected successfully to mongoDB');
-    const db = client.db(dbName);
-    const collection = db.collection(tableName);
-    return collection;
+const UsersRepository_1 = require("./src/mongoRepositories/UsersRepository");
+const initMongo = () => __awaiter(void 0, void 0, void 0, function* () {
+    const repository = new UsersRepository_1.UsersRepository();
+    yield repository.createUser({
+        "username": "Usuário4",
+        "password": "$2b$10$qevlzwxokOTUGf8n070VS.U2pwsv.SQeGIR.j06IqVPQKQws475jK",
+        "accountId": "f266b02f-2e68-4424-aed2-7023eb2dcbdc"
+    }, "641b2a2be9c14424aebb6588");
 });
-exports.mongoCollection = mongoCollection;
-//# sourceMappingURL=mongoClient.js.map
+console.log("TESTEEEEEEEE");
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield initMongo();
+}))();
+//# sourceMappingURL=init-mongo.js.map

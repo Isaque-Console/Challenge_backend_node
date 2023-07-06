@@ -5,7 +5,7 @@ import { Users, UsersProps } from "../entities/users";
 export interface IUsersRepository {
     getUserById(userId: string): Promise<any>;
     getUserByUsername(username: string): Promise<any>;
-    createUser(props: UsersProps): Promise<Users | undefined>;
+    createUser(props: UsersProps, _id?: string): Promise<Users | undefined>;
 }
 
 export class UsersRepository implements IUsersRepository {
@@ -21,7 +21,9 @@ export class UsersRepository implements IUsersRepository {
         return await queries.getUserByUsername(username, collection);
     }
 
-    async createUser(props: UsersProps): Promise<Users> {
-        throw new Error("Method not implemented");
+    async createUser(props: UsersProps, _id?: string): Promise<Users> {
+        const collection: any = await mongoCollection('users');
+        const queries: MongoQueries = new MongoQueries();
+        return await queries.createItem({ _id, ...props }, collection);
     }
 }

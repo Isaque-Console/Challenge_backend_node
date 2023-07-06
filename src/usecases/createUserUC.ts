@@ -1,13 +1,14 @@
 import { IUser, Users, UsersProps } from "../entities/users";
-import { UsersRepository } from "../repositories/usersRepository";
+import { IUsersRepository, UsersRepository } from "../repositories/usersRepository";
 import bcrypt from "bcrypt";
 import { Accounts } from "../entities/accounts";
 import { CreateAccountUC } from "./createAccountsUC";
-import { AccountsRepository } from "../repositories/accountsRepository";
+import { IAccountsRepository } from "../repositories/accountsRepository";
 
 export class CreateUserUC implements IUser {
     constructor(
-        private usersRepository: UsersRepository,
+        private usersRepository: IUsersRepository,
+        private accountsRepository: IAccountsRepository,
     ) { }
 
     async usernameIsUnique(username: string): Promise<boolean> {
@@ -54,7 +55,7 @@ export class CreateUserUC implements IUser {
         let account: Accounts;
         let accountId: string;
         if (!userProps.accountId) {
-            createAccountUseCase = new CreateAccountUC(new AccountsRepository());
+            createAccountUseCase = new CreateAccountUC(this.accountsRepository);
             account = await createAccountUseCase.create();
             accountId = account.id
         } else {

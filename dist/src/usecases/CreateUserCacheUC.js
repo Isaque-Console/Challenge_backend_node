@@ -12,19 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserCacheUC = void 0;
 const GetUserUC_1 = require("./GetUserUC");
 class CreateUserCacheUC {
-    constructor(accountsRedisRepository, accountsPostgresRepository) {
-        this.accountsRedisRepository = accountsRedisRepository;
-        this.accountsPostgresRepository = accountsPostgresRepository;
+    constructor(usersRedisRepository, usersPostgresRepository) {
+        this.usersRedisRepository = usersRedisRepository;
+        this.usersPostgresRepository = usersPostgresRepository;
     }
     create(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userAlredyExists = yield this.accountsRedisRepository.getUserByKey(userId);
+            const userAlredyExists = yield this.usersRedisRepository.getUserByKey(userId);
             if (userAlredyExists)
                 return userAlredyExists;
-            const getUserUC = new GetUserUC_1.GetUserUC(this.accountsPostgresRepository);
+            const getUserUC = new GetUserUC_1.GetUserUC(this.usersPostgresRepository);
             const user = yield getUserUC.getUserById(userId);
-            console.log(user);
-            const createdUser = yield this.accountsRedisRepository.create(JSON.stringify(user), userId);
+            const createdUser = yield this.usersRedisRepository.create(JSON.stringify(user), userId);
             if (!createdUser)
                 throw new Error("Create user cache error.");
             return createdUser;

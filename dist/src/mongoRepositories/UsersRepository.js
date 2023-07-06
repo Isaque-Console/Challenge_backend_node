@@ -27,9 +27,11 @@ class UsersRepository {
             return yield queries.getUserByUsername(username, collection);
         });
     }
-    createUser(props) {
+    createUser(props, _id) {
         return __awaiter(this, void 0, void 0, function* () {
-            throw new Error("Method not implemented");
+            const collection = yield (0, mongoClient_1.mongoCollection)('users');
+            const queries = new MongoQueries_1.MongoQueries();
+            return yield queries.createItem(Object.assign({ _id }, props), collection);
         });
     }
 }

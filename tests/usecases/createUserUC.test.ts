@@ -1,4 +1,5 @@
 import { CreateUserUC } from '../../src/usecases/createUserUC'
+import { InMemoryAccountsRepository } from '../inMemory/in-memory-accounts-repository';
 import { InMemoryUsersRepository } from '../inMemory/in-memory-users-repository'
 import bcrypt from "bcrypt";
 
@@ -17,7 +18,7 @@ describe("usernameIsUnique tests", () => {
         // given a username that does not exist in the database
         const username = "Isaque";
         // when the usernameIsUnique method is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const isUnique = await useCase.usernameIsUnique(username);
         // then the method should return true
         expect(isUnique).toBe(true);
@@ -28,7 +29,7 @@ describe("usernameIsUnique tests", () => {
         const username = "test1";
 
         // when the usernameIsUnique method is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const isUnique = await useCase.usernameIsUnique(username);
 
         // then the method should return true
@@ -41,7 +42,7 @@ describe("validUsername tests", () => {
         // given a valid username
 
         // when the validUsername method is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const isValid = await useCase.usernameIsUnique(validUsername);
 
         // then the method should return true
@@ -54,7 +55,7 @@ describe("validUsername tests", () => {
 
         // when the validUsername method is invoked
         try {
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const isValid = await useCase.usernameIsUnique(username);
         } catch (error: any) {
             expect(error.message).toBe("O nome de usuário deve conter pelo menos 3 caracteres.");
@@ -69,7 +70,7 @@ describe("validUsername tests", () => {
 
         try {
             // when the validUsername method is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const isValid = await useCase.usernameIsUnique(username);
         } catch (error: any) {
             // then the method should return true
@@ -84,7 +85,7 @@ describe("validPassword tests", () => {
         // given a valid password
 
         // when the validPassword method is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const isValid = useCase.validPassword(validPassword);
 
         // then the method should return true
@@ -96,7 +97,7 @@ describe("validPassword tests", () => {
         const password = "123456A";
         try {
             // when the validPassword method is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const isValid = useCase.validPassword(password);
         } catch (error: any) {
             // then the method should return true
@@ -109,7 +110,7 @@ describe("validPassword tests", () => {
         const password = "abcdefgh";
         try {
             // when the validPassword method is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const isValid = useCase.validPassword(password);
         } catch (error: any) {
             // then the method should return true
@@ -122,7 +123,7 @@ describe("validPassword tests", () => {
         const password = "abcdefgh1234567a";
         try {
             // when the validPassword method is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const isValid = useCase.validPassword(password);
         } catch (error: any) {
             // then the method should return true
@@ -136,7 +137,7 @@ describe("passwordHash tests", () => {
         // given a valid password
 
         // when passwordHash method is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const hashedPassword = useCase.passwordHash(validPassword);
 
         // then the method should return a hashed password
@@ -147,7 +148,7 @@ describe("passwordHash tests", () => {
         // given a valid password
 
         // when passwordHash and bcrypt.compare method is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const hashedPassword = useCase.passwordHash(validPassword);
         const match = await bcrypt.compare(validPassword, hashedPassword);
         // then the bcrypt.compare method should return true
@@ -160,7 +161,7 @@ describe('Create Users entity', () => {
         // given valid user props, and undefined id
 
         //when create function from useCase is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const user = await useCase.create(validUsersProps);
         const match = await bcrypt.compare(validUsersProps.password, user.props.password);
 
@@ -177,7 +178,7 @@ describe('Create Users entity', () => {
         const userId = "aaabbb";
 
         //when create function from useCase is invoked
-        const useCase = new CreateUserUC(new InMemoryUsersRepository());
+        const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
         const user = await useCase.create(validUsersProps, userId);
         const match = await bcrypt.compare(validUsersProps.password, user.props.password);
 
@@ -199,7 +200,7 @@ describe('Create Users entity', () => {
 
         try {
             //when create function from useCase is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const user = await useCase.create(invalidUsersProps);
         } catch (error: any) {
             //then an error should be throwed
@@ -217,7 +218,7 @@ describe('Create Users entity', () => {
 
         try {
             //when create function from useCase is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const user = await useCase.create(invalidUsersProps);
         } catch (error: any) {
             //then an error should be throwed
@@ -235,7 +236,7 @@ describe('Create Users entity', () => {
 
         try {
             //when create function from useCase is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const user = await useCase.create(invalidUsersProps);
         } catch (error: any) {
             //then an error should be throwed
@@ -253,7 +254,7 @@ describe('Create Users entity', () => {
 
         try {
             //when create function from useCase is invoked
-            const useCase = new CreateUserUC(new InMemoryUsersRepository());
+            const useCase = new CreateUserUC(new InMemoryUsersRepository(), new InMemoryAccountsRepository());
             const user = await useCase.create(invalidUsersProps);
         } catch (error: any) {
             //then an error should be throwed

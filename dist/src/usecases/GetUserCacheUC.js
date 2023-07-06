@@ -16,7 +16,7 @@ class GetUserCacheUC {
     }
     getUserById(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userCache = yield this.usersRepository.getUserByKey(`user-${userId}`);
+            const userCache = yield this.usersRepository.getUserByKey(userId);
             console.log("Fetching cache in redis.");
             return JSON.parse(userCache);
         });

@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserController = void 0;
 const createUserUC_1 = require("../usecases/createUserUC");
 const usersRepository_1 = require("../repositories/usersRepository");
+const accountsRepository_1 = require("../repositories/accountsRepository");
 class CreateUserController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { userId, username, password, accountId } = request.body;
             const newUserProps = { username, password, accountId };
-            const repository = new usersRepository_1.UsersRepository();
-            const useCase = new createUserUC_1.CreateUserUC(repository);
+            const useCase = new createUserUC_1.CreateUserUC(new usersRepository_1.UsersRepository(), new accountsRepository_1.AccountsRepository());
             const result = yield useCase.execute(newUserProps, userId);
             return response.json(result);
         });

@@ -16,10 +16,10 @@ exports.CreateUserUC = void 0;
 const users_1 = require("../entities/users");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const createAccountsUC_1 = require("./createAccountsUC");
-const accountsRepository_1 = require("../repositories/accountsRepository");
 class CreateUserUC {
-    constructor(usersRepository) {
+    constructor(usersRepository, accountsRepository) {
         this.usersRepository = usersRepository;
+        this.accountsRepository = accountsRepository;
     }
     usernameIsUnique(username) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -67,7 +67,7 @@ class CreateUserUC {
             let account;
             let accountId;
             if (!userProps.accountId) {
-                createAccountUseCase = new createAccountsUC_1.CreateAccountUC(new accountsRepository_1.AccountsRepository());
+                createAccountUseCase = new createAccountsUC_1.CreateAccountUC(this.accountsRepository);
                 account = yield createAccountUseCase.create();
                 accountId = account.id;
             }

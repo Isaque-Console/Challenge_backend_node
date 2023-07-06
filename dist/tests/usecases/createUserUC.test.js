@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const createUserUC_1 = require("../../src/usecases/createUserUC");
+const in_memory_accounts_repository_1 = require("../inMemory/in-memory-accounts-repository");
 const in_memory_users_repository_1 = require("../inMemory/in-memory-users-repository");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const validUsername = "Isaque";
@@ -28,7 +29,7 @@ describe("usernameIsUnique tests", () => {
         // given a username that does not exist in the database
         const username = "Isaque";
         // when the usernameIsUnique method is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const isUnique = yield useCase.usernameIsUnique(username);
         // then the method should return true
         expect(isUnique).toBe(true);
@@ -37,7 +38,7 @@ describe("usernameIsUnique tests", () => {
         // given a username that does not exist in the database
         const username = "test1";
         // when the usernameIsUnique method is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const isUnique = yield useCase.usernameIsUnique(username);
         // then the method should return true
         expect(isUnique).toBe(false);
@@ -47,7 +48,7 @@ describe("validUsername tests", () => {
     it("should return true when username is valid", () => __awaiter(void 0, void 0, void 0, function* () {
         // given a valid username
         // when the validUsername method is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const isValid = yield useCase.usernameIsUnique(validUsername);
         // then the method should return true
         expect(isValid).toBe(true);
@@ -57,7 +58,7 @@ describe("validUsername tests", () => {
         const username = "abc";
         // when the validUsername method is invoked
         try {
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const isValid = yield useCase.usernameIsUnique(username);
         }
         catch (error) {
@@ -70,7 +71,7 @@ describe("validUsername tests", () => {
         const username = "test1";
         try {
             // when the validUsername method is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const isValid = yield useCase.usernameIsUnique(username);
         }
         catch (error) {
@@ -83,7 +84,7 @@ describe("validPassword tests", () => {
     it("Should return true when a valid password", () => {
         // given a valid password
         // when the validPassword method is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const isValid = useCase.validPassword(validPassword);
         // then the method should return true
         expect(isValid).toBe(true);
@@ -93,7 +94,7 @@ describe("validPassword tests", () => {
         const password = "123456A";
         try {
             // when the validPassword method is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const isValid = useCase.validPassword(password);
         }
         catch (error) {
@@ -106,7 +107,7 @@ describe("validPassword tests", () => {
         const password = "abcdefgh";
         try {
             // when the validPassword method is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const isValid = useCase.validPassword(password);
         }
         catch (error) {
@@ -119,7 +120,7 @@ describe("validPassword tests", () => {
         const password = "abcdefgh1234567a";
         try {
             // when the validPassword method is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const isValid = useCase.validPassword(password);
         }
         catch (error) {
@@ -132,7 +133,7 @@ describe("passwordHash tests", () => {
     it("Should return a hashed password", () => {
         // given a valid password
         // when passwordHash method is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const hashedPassword = useCase.passwordHash(validPassword);
         // then the method should return a hashed password
         expect(hashedPassword.length).toBe(60);
@@ -140,7 +141,7 @@ describe("passwordHash tests", () => {
     it("Should match the password with the hash", () => __awaiter(void 0, void 0, void 0, function* () {
         // given a valid password
         // when passwordHash and bcrypt.compare method is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const hashedPassword = useCase.passwordHash(validPassword);
         const match = yield bcrypt_1.default.compare(validPassword, hashedPassword);
         // then the bcrypt.compare method should return true
@@ -151,7 +152,7 @@ describe('Create Users entity', () => {
     it('Should be able to create a new Users instance by not sending an id', () => __awaiter(void 0, void 0, void 0, function* () {
         // given valid user props, and undefined id
         //when create function from useCase is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const user = yield useCase.create(validUsersProps);
         const match = yield bcrypt_1.default.compare(validUsersProps.password, user.props.password);
         //then a new user should be created with the respective properties and an UUID
@@ -165,7 +166,7 @@ describe('Create Users entity', () => {
         // given valid user props, and existing id
         const userId = "aaabbb";
         //when create function from useCase is invoked
-        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+        const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
         const user = yield useCase.create(validUsersProps, userId);
         const match = yield bcrypt_1.default.compare(validUsersProps.password, user.props.password);
         //then a new user should be created with the respective properties
@@ -184,7 +185,7 @@ describe('Create Users entity', () => {
         };
         try {
             //when create function from useCase is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const user = yield useCase.create(invalidUsersProps);
         }
         catch (error) {
@@ -201,7 +202,7 @@ describe('Create Users entity', () => {
         };
         try {
             //when create function from useCase is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const user = yield useCase.create(invalidUsersProps);
         }
         catch (error) {
@@ -218,7 +219,7 @@ describe('Create Users entity', () => {
         };
         try {
             //when create function from useCase is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const user = yield useCase.create(invalidUsersProps);
         }
         catch (error) {
@@ -235,7 +236,7 @@ describe('Create Users entity', () => {
         };
         try {
             //when create function from useCase is invoked
-            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository());
+            const useCase = new createUserUC_1.CreateUserUC(new in_memory_users_repository_1.InMemoryUsersRepository(), new in_memory_accounts_repository_1.InMemoryAccountsRepository());
             const user = yield useCase.create(invalidUsersProps);
         }
         catch (error) {
