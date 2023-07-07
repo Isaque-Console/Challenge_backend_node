@@ -18,7 +18,6 @@ const initMongo = () => __awaiter(void 0, void 0, void 0, function* () {
         "accountId": "f266b02f-2e68-4424-aed2-7023eb2dcbdc"
     }, "641b2a2be9c14424aebb6588");
 });
-console.log("TESTEEEEEEEE");
 (() => __awaiter(void 0, void 0, void 0, function* () {
     yield initMongo();
 }))();

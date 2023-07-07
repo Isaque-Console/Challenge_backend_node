@@ -27,7 +27,7 @@ class GetUserController {
                 console.timeEnd();
                 if (userCache)
                     return response.status(200).json(userCache);
-                console.log("There is nothing in cache, so fetching datas in other database.");
+                console.log("There is nothing in cache, so fetching datas from postgres.");
                 // using postgres
                 console.time();
                 const usersPostgresRepository = new usersRepository_1.UsersRepository();
