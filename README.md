@@ -1,4 +1,4 @@
-# Challenge NGCASH
+# FinBank API
 ## Resumo do projeto
 Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma simplificada, expondo endpoints que permitem criar uma conta, fazer transações financeiras, consultar saldo, buscar usuários, buscar transações, etc. Esse projeto foi feito atentando para utilizar alguns conceitos importantes no desenvolvimento do backend, como exemplo, autenticação, autorização, Clean arch, POO, um pouco de testes unitários, dockerização, além disso, utilizei o design pattern Strategy, para que seja possível escalar essa aplicação facilmente com algum novo banco de dados ou regra de negócios, sem que seja preciso reestruturar o código base, tornando, assim, o código bastante independente de frameworks e ferramentas utlizadas. Apliquei ainda um pouco do conceito do design pattern Factory Method, criando uma classe abstrata que serve de modelo para as entidades do projeto, as quais têm implementações diferentes dos atributos e métodos, permitindo assim a criação de novas entidades de acordo com o crescimento do projeto.
 
@@ -11,7 +11,7 @@ Additionally, I implemented the Strategy design pattern to ensure the applicatio
 
 Furthermore, I applied the Factory Method design pattern by creating an abstract class that serves as a blueprint for the project's entities. Each entity has distinct implementations of attributes and methods, allowing for seamless expansion of the project as new requirements emerge.
 
-### Tecnologias utilizadas:
+### Technologies Used:
 - Docker
 - Docker-compose
 - Dockerize
