@@ -27,7 +27,7 @@ Furthermore, I applied the Factory Method design pattern by creating an abstract
 ### Concepts used:
 - Containerization
 - Cache
-- Testes unitários
+- Unit tests
 - In memory database
 - Design pattern (Strategy and Factory Method)
 - Authentication
