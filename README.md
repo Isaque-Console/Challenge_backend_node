@@ -2,7 +2,7 @@
 ## Resumo do projeto
 Esse projeto é uma api que simula uma aplicação de Banco financeiro de forma simplificada, expondo endpoints que permitem criar uma conta, fazer transações financeiras, consultar saldo, buscar usuários, buscar transações, etc. Esse projeto foi feito atentando para utilizar alguns conceitos importantes no desenvolvimento do backend, como exemplo, autenticação, autorização, Clean arch, POO, um pouco de testes unitários, dockerização, além disso, utilizei o design pattern Strategy, para que seja possível escalar essa aplicação facilmente com algum novo banco de dados ou regra de negócios, sem que seja preciso reestruturar o código base, tornando, assim, o código bastante independente de frameworks e ferramentas utlizadas. Apliquei ainda um pouco do conceito do design pattern Factory Method, criando uma classe abstrata que serve de modelo para as entidades do projeto, as quais têm implementações diferentes dos atributos e métodos, permitindo assim a criação de novas entidades de acordo com o crescimento do projeto.
 
-## ENGLISH
+## Project summary
 This project is an API that simulates a financial banking application in a simplified manner, exposing endpoints that allow users to create an account, perform financial transactions, check balances, search for users, retrieve transaction history, and more.
 
 The project was built with a strong focus on key backend development concepts, including authentication, authorization, Clean Architecture, Object-Oriented Programming (OOP), basic unit testing, and containerization using Docker.
